@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Socket Client</title>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <div>
+        <label for="message">Message to send:</label>
+        <input type="text" id="message" />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <div id="output"></div>
+
+    <script>
+        // Connect to the WebSocket server
+        const socket = new WebSocket('ws://localhost:8080');
+
+        // Display messages from the server
+        const output = document.getElementById('output');
+        socket.onmessage = (event) => {
+
+                const message = document.createElement('p');
+                message.textContent = `Server: ${event.data}`;
+                output.appendChild(message);
+            }
+
+            // Send a message to the server
+            function sendMessage() {
+                const input = document.getElementById('message');
+                const message = input.value;
+                if(message && socket.readyState === WebSocket.OPEN) {
+                    socket.send(message);
+                    input.value = ''; //Clear the input field
+                } else {
+                    alert('Websocket is not connected.');
+                }
+            }
+
+            // Handle connection open
+            socket.onopen = () => {
+                const message = document.createElement('p');
+                message.textContent = 'Connected to the WebSocket server.';
+                output.appendChild(message);
+            };
+
+            // Handle Errors
+            socket.onerror = (error) => {
+                console.error('Websocket error:', error);
+            };
+
+            // Handle connection close 
+            socket.onclose = () => {
+                const message = document.createElement('p');
+                message.textContent = 'Disconnected from the WebSocket server.';
+                output.appendChild(message);
+            };
+    </script>
+
+</body>
+</html>
