@@ -18,14 +18,13 @@
         // Connect to the WebSocket server
         const socket = new WebSocket('ws://localhost:8080');
 
-        // Display messages from the server
-        const output = document.getElementById('output');
-        socket.onmessage = (event) => {
 
+            // Handle connection open
+            socket.onopen = () => {
                 const message = document.createElement('p');
-                message.textContent = `Server: ${event.data}`;
+                message.textContent = 'Connected to the WebSocket server.';
                 output.appendChild(message);
-            }
+            };
 
             // Send a message to the server
             function sendMessage() {
@@ -39,12 +38,15 @@
                 }
             }
 
-            // Handle connection open
-            socket.onopen = () => {
+            
+            // Display messages from the server
+            const output = document.getElementById('output');
+            socket.onmessage = (event) => {
+
                 const message = document.createElement('p');
-                message.textContent = 'Connected to the WebSocket server.';
+                message.textContent = `Server: ${event.data}`;
                 output.appendChild(message);
-            };
+            }
 
             // Handle Errors
             socket.onerror = (error) => {

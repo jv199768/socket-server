@@ -7,6 +7,8 @@ console.log('Websocket server started on ws://localhost:8080 ');
 
 server.on('connection', (socket) => {
     console.log('Client Connected');
+    // Send a welcome message when a client connects
+    socket.send('Welcome to the WebSocket server')
 
     // Handle Incoming messages
     socket.on('message', (message) => {
@@ -20,6 +22,5 @@ server.on('connection', (socket) => {
         console.log('Client disconnected');
     })
 
-    // Send a welcome message when a client connects
-    socket.send('Welcome to the WebSocket server')
+
 })
