@@ -3,7 +3,7 @@ const WebSokcetServer = require("websocket").server
 let connection = null; //global var for connection, that will be changes later
 
 const httpserver = http.createServer((req, res) => {
-    console.log("we have received a request");
+    console.log("we have received a request");//first breakpoint, not really necessary just to check connection
 })
 
 const websocket = new WebSokcetServer({
@@ -19,10 +19,10 @@ websocket.on("request", request => {
     //2nd paramter - we can check the origin of the request, generally the url the request was sent from , to checck if it's atrusted source
     //Below are the events that we can use , open, close, message etc.The main point of WebSockets is having these events.
     //When each event occurs we can get a certain response from server automatically without the client needing to initiate a request
-    connection.on("onopen", () => console.log("OPEN"))
-    connection.on("onclose", () => console.log("CLOSE"))
-    connection.on("onmessage", message => { // Fucntion to do something if server receives a message
-        console.og(`Received message ${message}`)
+    connection.on("open", () => console.log("OPEN"))
+    connection.on("close", () => console.log("CLOSE"))
+    connection.on("message", message => { // Fucntion to do something if server receives a message
+        console.log(`Received message ${message.utf8Data}`)
     })
 })
 
