@@ -28,7 +28,7 @@ websocket.on("request", request => {
     connection.on("open", () => console.log("OPEN"))
     connection.on("close", () => console.log("CLOSE"))
     connection.on("message", message => { // Fucntion to do something if server receives a message
-        //connection.send("message") from the debug console will send a message to the browser client
+        //connection.send("message from server") from the debug console will send a message to the browser client
         //on the browser console we can send a reply via : ws.send("Hello! I'm client")
         //utf8 is the data type, after sending reply from client we can check the data using this breakpoint
         console.log(`Received message ${message.utf8Data}`)
