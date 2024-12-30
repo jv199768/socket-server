@@ -1,0 +1,5 @@
+#Notes from CS170F
+
+https://stackoverflow.com/questions/27306117/is-a-web-socket-connection-in-javascript-an-inbound-connection
+
+https://voyager.deanza.edu/~hso/cis170f/lecture/ch08/win08/advanced.html
